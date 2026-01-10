@@ -47,7 +47,7 @@ class UserController extends Controller
             'shift_id' => $request->shift_id,
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
-            'location_id' => $request->location_id,
+            // 'location_id' => $request->location_id,
             'tenant_id' => $request->tenant_id,
             'status' => 1
         ]);
@@ -82,6 +82,16 @@ class UserController extends Controller
             'gender'=> $request->gender,
             'photo' => $imagePath,
         ]);
+
+        if($request->location_ids)
+        {
+            foreach ($request->location_ids as $location_id) {
+                UserLocation::create([
+                    'user_id' => $user->id,
+                    'location_id' => $location_id,
+                ]);
+            }
+        }
 
         $contact_info = ContactInfo::create([
             'user_id' => $user->id,
@@ -314,6 +324,17 @@ class UserController extends Controller
             'date_of_hire' => $request->date_of_hire,
             'employment_type' => $request->employment_type,
         ]);
+
+        if($request->location_ids)
+        {
+            UserLocation::where('user_id', $user->id)->delete();
+            foreach ($request->location_ids as $location_id) {
+                UserLocation::create([
+                    'user_id' => $user->id,
+                    'location_id' => $location_id,
+                ]);
+            }
+        }
 
         LeaveBalance::where('user_id', $user->id)->delete();
 

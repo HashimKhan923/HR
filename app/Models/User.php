@@ -110,6 +110,11 @@ class User extends Authenticatable
         return $this->hasOne(AccountInformation::class);
     }
 
+    public function userLocation()
+    {
+        return $this->hasMany(UserLocation::class);
+    }
+
     public function overTime()
     {
         return $this->hasOne(OverTime::class);
