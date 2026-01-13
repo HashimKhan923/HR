@@ -118,7 +118,7 @@ class UserController extends Controller
             'department_id'=> $request->department_id,
             'position'=> $request->position,
             'designation'=> $request->designation,
-            'manager_id'=> $request->manager_id,
+            // 'manager_id'=> $request->manager_id,
             'date_of_hire'=> $request->date_of_hire,
             'employment_type'=> $request->employment_type,
         ]);
@@ -320,7 +320,7 @@ class UserController extends Controller
             ['user_id' => $user->id],[
             'department_id' => $request->department_id,
             'designation' => $request->designation,
-            'manager_id' => $request->manager_id,
+            // 'manager_id' => $request->manager_id,
             'date_of_hire' => $request->date_of_hire,
             'employment_type' => $request->employment_type,
         ]);
