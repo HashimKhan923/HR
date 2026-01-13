@@ -270,7 +270,7 @@ class AttendenceController extends Controller
 
     public function search(Request $request)
     {
-        $attendences = Time::query()->with('user.personalInfo','jobInfo','attendenceRequest'); // Initialize query with relationship
+        $attendences = Time::query()->with('user.personalInfo','user.jobInfo','attendenceRequest'); // Initialize query with relationship
 
         if ($request->user_id) {
             $attendences->where('user_id', $request->user_id);
