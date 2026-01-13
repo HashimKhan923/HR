@@ -22,7 +22,7 @@ class AuthController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
-        $user = User::with('personalInfo', 'userLocation.location', 'shift')
+        $user = User::with('personalInfo','jobInfo','userLocation.location', 'shift')
             ->where('email', $request->email)
             ->first();
 
