@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Location;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Models\UserLocation;
 
 class HomeController extends Controller
 {
