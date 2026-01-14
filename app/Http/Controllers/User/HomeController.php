@@ -49,10 +49,10 @@ class HomeController extends Controller
         
     
 
-        $user = User::with('leaveBalance','overTime','jobInfo','userLocation.location')->where('id',$id)->first();
+        $user = User::with('leaveBalance','overTime','jobInfo')->where('id',$id)->first();
         $shiftk = Shift::where('id',$user->shift_id)->first();
         $department = Department::where('id',$user->jobInfo->department_id)->first();
-        $location = Location::where('id',$user->location_id)->first();
+        $locations = UserLocation::with('location')->where('user_id',$user->id)->get();
 
         $shift = Carbon::parse($shiftk->time_to)->diff(Carbon::parse($shiftk->time_from));
         $shift = Carbon::parse($shift->h.':'.$shift->i.':'.$shift->s);
@@ -146,7 +146,7 @@ class HomeController extends Controller
             "RemainingTime"=>$remainingTime,
             'ShiftName'=>$ShiftN,
             'department'=>$department,
-            'location'=>$location,
+            'locations'=>$locations,
             "attendence"=>$Time,
             "message" => $message,
             'total_working_days' => $totalDays,
