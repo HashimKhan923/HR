@@ -157,6 +157,7 @@ class HomeController extends Controller
             'total_half_days' => $totalHalf,
             'total_short_days' => $totalShort,
             'total_completed' => $totalCompleted,
+            'user' => $user
         ];
         return response($response, 200);   
 
