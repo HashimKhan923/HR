@@ -239,7 +239,7 @@ public function detail($id)
     
         $timeRecord->time_out = Carbon::now('Asia/Karachi');
         if ($request->has('over_time')) {
-            $timeRecord->over_time = $request->over_time;
+            $timeRecord->over_time = Carbon::parse($request->over_time, 'Asia/Karachi');
         }
         $timeRecord->save();
     
