@@ -122,6 +122,7 @@ class UserController extends Controller
             // 'manager_id'=> $request->manager_id,
             'date_of_hire'=> $request->date_of_hire,
             'employment_type'=> $request->employment_type,
+            'is_remote'=> $request->is_remote,
         ]);
 
         if($request->leave_types)
@@ -324,6 +325,7 @@ class UserController extends Controller
             // 'manager_id' => $request->manager_id,
             'date_of_hire' => $request->date_of_hire,
             'employment_type' => $request->employment_type,
+            'is_remote' => $request->is_remote,
         ]);
 
         if($request->location_ids)
