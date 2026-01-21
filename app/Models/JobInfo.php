@@ -16,6 +16,7 @@ class JobInfo extends Model
         'date_of_hire',
         'employment_type',
         'work_location',
+        'is_remote',
     ];
 
     public function user()
