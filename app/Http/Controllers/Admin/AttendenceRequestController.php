@@ -157,4 +157,24 @@ class AttendenceRequestController extends Controller
 
         return response()->json(['message' => 'Attendance request rejected successfully.', 'attendenceRequest' => $attendenceRequest]);
     }
+
+    public function update(Request $request)
+    {
+        $attendenceRequest = AttendenceRequest::find($request->id);
+
+        if (!$attendenceRequest) {
+            return response()->json(['message' => 'Attendance request not found.'], 404);
+        }
+
+        $request->validate([
+            'reason' => 'sometimes|required|string',
+            'time_in' => 'sometimes|required|date',
+            'time_out' => 'sometimes|required|date|after:time_in',
+            'status' => 'sometimes|required|in:pending,approved,rejected',
+        ]);
+
+        $attendenceRequest->update($request->only(['reason', 'time_in', 'time_out', 'status']));
+
+        return response()->json(['message' => 'Attendance request updated successfully.', 'attendenceRequest' => $attendenceRequest]);
+    }
 }

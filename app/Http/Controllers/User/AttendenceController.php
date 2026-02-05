@@ -12,6 +12,7 @@ use App\Models\Department;
 use Carbon\Carbon;
 use App\Models\Location;
 use App\Services\GeolocationService;
+use App\Models\UserLocation;
 
 
 class AttendenceController extends Controller
@@ -159,8 +160,11 @@ public function detail($id)
                 return response(['status' => false, 'message' => 'Today is your off day'], 200);
             }
 
-            // if($check_user->location_id == $location_id)
-            // {
+            // multple location checks
+
+            $userLocations = UserLocation::where('user_id', $user_id)->pluck('location_id')->toArray();
+            if (in_array($location_id, $userLocations)) {
+                // User is in an authorized location
 
         if ($CurrentTime->gt($ShiftTimeIn->copy()->subMinutes($check_shift->early_grace_period)) && $CurrentTime->lt($ShiftTimeOut)) {
 
@@ -197,12 +201,12 @@ public function detail($id)
             return response($response, 200);
         }
 
-            // }
-            // else
-            // {
-            //         $response = ['status' => true, "message" => "You are not in location!"];
-            //         return response($response, 200);
-            // }
+            }
+            else
+            {
+                    $response = ['status' => true, "message" => "You are not in location!"];
+                    return response($response, 200);
+            }
         
 
 

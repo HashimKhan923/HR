@@ -136,6 +136,7 @@ Route::group(['middleware' => ['auth.token']], function(){
                 Route::get('detail/{id}','show');
                 Route::get('approve/{id}','approve');
                 Route::get('reject/{id}','reject');
+                Route::post('update','update');
             });
         });
 
